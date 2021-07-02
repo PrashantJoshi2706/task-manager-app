@@ -3,7 +3,7 @@ const express = require('express');
 const User = require('../models/user');
 const router = express.Router();
 const sharp = require('sharp');
-const {sendingMail} = require('../emails/account');
+const {sendingMail, sendingCancelMail} = require('../emails/account');
 const auth = require('../middleware/auth');
 const multer = require('multer');
 /*create a new user */
@@ -33,7 +33,7 @@ router.post('/user/login', async (req, res)=>{
         res.status(404).send({Error: "user does not exist"})
     }
 })
-/*rea the profile of user */
+/*read the profile of user */
 router.get('/users/me', auth,async (req, res)=>{
     try{
         res.send(req.user);
